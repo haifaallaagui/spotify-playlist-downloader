@@ -1,67 +1,71 @@
-# 🎧 Spotify Playlist Scraper and YouTube Music Downloader
+# Spotify Playlist Scraper and YouTube Music Downloader
 
-Ce projet Python automatise le processus d'extraction de chansons depuis une playlist Spotify, de recherche de leurs vidéos correspondantes sur YouTube, et de téléchargement de l'audio au format MP3.
+This Python project automates the process of scraping songs from a Spotify playlist, searching for their corresponding videos on YouTube, and downloading them as MP3 files. It uses `Selenium` for web scraping, `youtubesearchpython` to search YouTube, and `yt-dlp` to download audio from the videos.
 
----
+## Features
+- **Spotify Web Scraping:** Scrapes song titles and artists from a Spotify playlist.
+- **YouTube Search:** Finds YouTube videos for each song.
+- **Audio Downloading:** Downloads audio from the YouTube videos in MP3 format.
 
-## 🔧 Fonctionnalités
+## Prerequisites
 
-- **Scraping Spotify** : Récupération des titres et artistes depuis une playlist Spotify.
-- **Recherche YouTube** : Recherche de vidéos YouTube correspondant à chaque chanson.
-- **Téléchargement MP3** : Téléchargement de l'audio des vidéos YouTube en format MP3.
+1. **Python 3.8+** is required.
+2. **Google Chrome** browser.
+3. **ChromeDriver**: The ChromeDriver must be downloaded and its path specified in the script.
+4. **Required Python Libraries**:
+   - `selenium`
+   - `pandas`
+   - `youtubesearchpython`
+   - `yt-dlp`
+   - `argparse`
+   - `time`
 
----
-
-## 📋 Prérequis
-
-- Python 3.8 ou supérieur
-- Navigateur **Google Chrome**
-- **ChromeDriver** : Doit être téléchargé et son chemin spécifié dans le script.
-
-### 📦 Librairies Python nécessaires
+To install the necessary libraries, run:
 
 ```bash
 pip install selenium pandas youtubesearchpython yt-dlp
-⚙️ Installation de ChromeDriver
-Télécharge la version correcte de ChromeDriver correspondant à ta version de Google Chrome depuis :
+```
 
-👉 https://sites.google.com/chromium.org/driver/
+## Setup Instructions
 
-Place-le dans un répertoire connu et configure son chemin dans le script si besoin.
+1. **ChromeDriver:**
+   Download the correct version of ChromeDriver for your version of Chrome from [here](https://sites.google.com/a/chromium.org/chromedriver/downloads) and place it in a known directory.
 
-▶️ Utilisation
-🎛️ Arguments en ligne de commande
+## Usage
 
-Argument	Description
--u, --url	URL de la playlist Spotify à scraper
--o, --output	Chemin de sortie du fichier CSV contenant les titres et artistes extraits
-📌 Exemple
-bash
-Copy
-Edit
+### Command-Line Arguments
+
+- `-u`, `--url`: The URL of the Spotify playlist you want to scrape.
+- `-o`, `--output`: The path where the scraped song data will be saved in CSV format.
+
+### Example Usage
+
+```bash
 python script.py -u "https://open.spotify.com/playlist/your_playlist_url" -o "output.csv"
-###🔍 Étapes détaillées
-1. Scraping de la playlist Spotify
-Le script utilise Selenium pour ouvrir l'URL de la playlist et faire défiler la page pour charger toutes les chansons.
+```
 
-Il extrait les titres et noms des artistes.
+This will:
+1. Scrape the song titles and artist names from the provided Spotify playlist URL.
+2. Save the results into a CSV file (specified by the `-o` argument).
+3. Search for corresponding YouTube videos.
+4. Download the MP3 files to the specified directory in the script.
 
-Les données sont sauvegardées dans un fichier .csv.
+### Detailed Steps
 
-2. Recherche sur YouTube
-Pour chaque chanson, le script utilise youtubesearchpython pour trouver la vidéo YouTube correspondante.
+1. **Scraping the Spotify Playlist:**
+   The script uses Selenium to open the Spotify playlist URL and scrolls through the page to load all songs. It extracts the song titles and artist names, saving them to a CSV file.
 
-Il enregistre les URL des vidéos.
+2. **YouTube Search:**
+   For each song in the playlist, the script searches for a matching video on YouTube using the `youtubesearchpython` library. It retrieves the first result and stores the video URLs.
 
-3. Téléchargement des fichiers MP3
-Le script utilise yt-dlp pour télécharger l’audio de la meilleure qualité disponible.
+3. **Downloading MP3 Files:**
+   The script downloads the best available audio from YouTube videos using `yt-dlp` and saves them as MP3 files in the directory specified in the `download()` function.
 
-Les fichiers MP3 sont enregistrés dans un dossier défini dans la fonction download() du script.
 
-###📝 Remarques
-Vérifie que la version de ChromeDriver est compatible avec celle de ton navigateur Chrome.
+## Notes
 
-Assure-toi que le dossier de téléchargement spécifié existe avant d'exécuter le script.
+- Ensure that the ChromeDriver version matches your Chrome browser version.
+- Make sure that the specified download path exists before running the script.
+- Adjust the scrolling time in the script if the playlist is very large or slow to load.
 
-Si la playlist est longue ou lente à charger, tu peux ajuster le temps de défilement (scroll) dans le script.
-
+This **README** provides instructions on setup, usage, and the overall workflow of your project.
